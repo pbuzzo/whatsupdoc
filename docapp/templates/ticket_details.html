@@ -1,0 +1,17 @@
+{% load static %}
+
+<div class="basicbox">
+    <h1>{{ ticket.title }}</h1>
+    <h2>{{ ticket.user }}</h2>
+    <h2><a href="{% url 'user_details' ticket.filed_user.id %}"> {{ ticket.filed_user }}</a></h2>
+    <h2>Time Made:  {{ ticket.time }}</h2>
+
+    <h3>{{ ticket.description }}</h3>
+    <h3>Status of Ticket: {{ ticket.status }}</h3>
+
+    <HR>
+    <h3>Change Status To: </h3>
+    <a href={% url 'ticket_edit_in_progress' id=ticket.id %}><button>In Progress</button></a>
+    <a href={% url 'ticket_edit_finished' id=ticket.id %}><button>Finished</button></a>
+    <a href={% url 'ticket_edit_invalid' id=ticket.id %}><button>Not Valid</button></a>
+</div>

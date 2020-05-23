@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class="basicbox">
+    <form action="" method="post">
+        <!-- csrf_token helps prevent spamming of application -->
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <input type="submit" value="Submit">
+    </form>
+</div>

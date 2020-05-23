@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="basicbox">
+    <h1>{{ user.username }}</h1>
+    {% comment %} <h2>{{ user.bio }}</h2> {% endcomment %}
+    <h2>Current Tickets: </h2>
+
+    <ul>
+        {% for ticket in ticket_data %}
+            {% if ticket.user == user %}
+                <li><a href="{% url 'ticket_details' id=ticket.id %}"> {{ ticket.title }}</a> </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

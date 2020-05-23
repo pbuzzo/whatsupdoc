@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+</head>
+<main>
+    <html>
+        <body>
+            <h1>What's Up, Doc?</h1>
+
+            {% if request.user.is_authenticated %}
+                <div class='title_div'>Welcome Back, {{user.username}}!</div>
+                &nbsp;
+                <p><a href="{% url 'user_add_view' %}"> Add User</a> | <a href="{% url 'ticket_add_view' %}"> Add Ticket</a></p>
+                &nbsp;
+                <a href='logout/'>Logout</a>
+                &nbsp;
+                <div class="basicbox">
+                    <h2>Check Out All Current Tickets Below!...</h2>
+                    <hr/>
+                    &nbsp;
+                    <h3>New Tickets</h3>
+                    {% for item in ticket_data %}
+                        {% if item.status == 'NEW' %}
+                            <ul>
+                                <li>
+                                    <h2 class='tickets'>
+                                        <a href='ticket/{{item.id}}/'>{{ item.title }}</a>
+                                    </h2>
+                                    <ul>
+                                        <li>
+                                            {{ item.date }}
+                                        </li>
+                                        <li>
+                                            {{ item.description }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                    <h3>In-Progress Tickets</h3>
+                    {% for item in ticket_data %}
+                        {% if item.status == 'IN_PROGRESS' %}
+                            <ul>
+                                <li>
+                                    <h2 class='tickets'>
+                                        <a href='ticket/{{item.id}}/'>{{ item.title }}</a>
+                                    </h2>
+                                    <ul>
+                                        <li>
+                                            {{ item.date }}
+                                        </li>
+                                        <li>
+                                            {{ item.description }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                    <h3>Finished Tickets</h3>
+                    {% for item in ticket_data %}
+                        {% if item.status == 'FINISHED' %}
+                            <ul>
+                                <li>
+                                    <h2 class='tickets'>
+                                        <a href='ticket/{{item.id}}/'>{{ item.title }}</a>
+                                    </h2>
+                                    <ul>
+                                        <li>
+                                            {{ item.date }}
+                                        </li>
+                                        <li>
+                                            {{ item.description }}
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <a href='login/'>Login</a>
+                &nbsp;
+                <div>
+                    <h3>Log In Or Sign Up To Gain Access To All Of Your Current Tickets</h3>
+                </div>
+            {% endif %}
+
+
+            &nbsp;
+            &nbsp;
+            &nbsp;
+        </body>
+        
+    </html>
+</main>
